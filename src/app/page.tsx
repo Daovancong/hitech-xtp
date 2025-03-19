@@ -364,9 +364,26 @@ export default function page() {
                     <div className='text-[17px] font-[500] leading-10 m-[46px_0px_4px]' >
                       LIÊN KẾT
                     </div>
+                    <Link className='decoration-' href={'/'}>
+                      Trang chủ
+                    </Link>
                   </div>
                 </div>
-                <div className='px-4 flex-[1_1_0%]'></div>
+                <div className='px-4 flex-[1]'>
+                  <div>
+                    <div className='text-[17px] font-[500] leading-10 m-[46px_0_4px]'>THÔNG TIN LIÊN HỆ</div>
+                    <div className='mt-2 flex'>
+                      <div className='mr-2 min-w-[150px] overflow-hidden overflow-ellipsis whitespace-normal optional-[.5]'>Fanpage :</div>
+                      <div>
+                        <div className='text-white' style={{ textDecoration: 'none' }}>
+                          <Link className='text-white' href={'https://www.facebook.com/Hitech.NTD/'} style={{ textDecoration: 'none' }}>
+                            https://www.facebook.com/Hitech.NTD/
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className='flex flex-row items-center justify-center'>
 
