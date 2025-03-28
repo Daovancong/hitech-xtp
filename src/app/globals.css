@@ -126,9 +126,20 @@ body {
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 9.81894px, rgba(255, 255, 255, 0.02) 0px 0px 0px 14.7284px, rgba(0, 0, 0, 0) 0px 0px 0px 19.6379px, rgba(255, 255, 255, 0.02) 0px 0px 0px 24.5473px;
 }
 
+
 @media only screen and (min-width:768px) {
   .togerMenu {
     display: none !important;
+  }
+}
+
+@media only screen and (max-width:945px) {
+  .jus-left {
+    display: flex;
+    flex-direction: column;
+  }
+  .w-screen {
+    width: 100%;
   }
 }
 

@@ -602,7 +602,7 @@ export default function page() {
           <div className='bg-[#212121] text-white text-base overflow-hidden flex flex-col '>
             <div className='min-h-44 mt-12 self-center w-full pr-[15px] pl-[15px]'>
               <div className='jus-left flex flex-row '>
-                <div className='w-[40%] px-4'>
+                <div className='w-screen w-[40%] px-4'>
                   <div className='max-w-[380px]'>
                     <div>
                       <div className='w-[100px] h-10' style={{ backgroundPosition: 'center center' }}>
@@ -617,7 +617,7 @@ export default function page() {
                     </div>
                   </div>
                 </div>
-                <div className='w-[30%] max-w-[300px] px-4'>
+                <div className='w-screen w-[30%] max-w-[300px] px-4'>
                   <div className='min-w-[130px] flex-col flex'>
                     <div className='text-[17px] font-[500] leading-10 m-[46px_0px_4px]' >
                       LIÊN KẾT
@@ -627,7 +627,7 @@ export default function page() {
                     </Link>
                   </div>
                 </div>
-                <div className='px-4 flex-[1]'>
+                <div className='w-screen px-4 flex-[1]'>
                   <div>
                     <div className='text-[17px] font-[500] leading-10 m-[46px_0_4px]'>THÔNG TIN LIÊN HỆ</div>
                     <div className='mt-2 flex'>
