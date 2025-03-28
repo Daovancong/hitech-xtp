@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import emailjs from "@emailjs/browser";
+import { useState, useEffect, useRef } from 'react';
 import Link from "next/link";
 // import { motion } from "framer-motion";
 
@@ -50,6 +51,63 @@ export default function page() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const [showForm, setShowForm] = useState(false);
+  const [isLocked, setIsLocked] = useState(false);
+
+  const [formData, setFormData] = useState({
+    position: '',
+    name: '',
+    university: '',
+    specialized: '',
+    studentyear: '',
+    skill: '',
+    project: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const handleClick = () => {
+    setShowForm(true);
+    document.body.style.overflow = "hidden"; // Chặn cuộn trang khi hiển thị form
+  };
+
+  const handleClickOff = () => {
+    setShowForm(false);
+    document.body.style.overflow = "auto"; // Khôi phục cuộn trang khi đóng form
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!formRef.current) {
+      console.error("Form reference is null");
+      return;
+    }
+
+    try {
+      const result = await emailjs.sendForm(
+        'service_465',  // Service ID 
+        'template_1210',  // Template 
+        formRef.current, //
+        'xK1xvHBDf9fjhLR_D',    // Public Key
+      );
+
+      alert("Hồ sơ đã gửi thành công!");
+      setFormData({ position: '', name: '', university: '', specialized: '', skill: '', project: '', studentyear: '', email: '', phone: '', message: '' });
+      setShowForm(false);
+    } catch (error) {
+      alert("Có lỗi xảy ra, vui lòng thử lại!");
+      console.error("Lỗi gửi email:", error);
+    }
+  };
   return (
     <div className='container-flux'>
       {/* Header */}
@@ -57,12 +115,12 @@ export default function page() {
         <div className='wrapper'>
           <div className='bg-[#000000] relative '>
             <div className='opacity-[0.71] bg-[url(/baneer-header-hitech.jpg)] max-h-[100vh] min-h-[500px] bg-cover bg-top text-base w-full flex flex-col justify-center items-center md:!h-[65vh]'></div>
-            <div className='md:!justify-between w-full h-20 fixed top-0 text-[#fff] z-[16] justify-between flex-row flex' style={{ background: bgColor, transition: '0.2s' }}>
+            <div className=' md:!justify-between w-full h-20 fixed top-0 text-[#fff] z-[16] justify-between flex-row flex' style={{ background: bgColor, transition: '0.2s' }}>
               <div className='pl-4 self-center text-[#fff]'>
                 <Image className='max-w-40 h-10 cursor-pointer' style={{ background: '0 0' }} width={300} height={300} alt='logo' src={'/Logo-hitech-2.png'} />
               </div>
               <div className='pr-4 md:!hidden self-center'><span className='inline-block w-6 h-6 cursor-pointer'></span></div>
-              <div className='pr-4 flex'>
+              <div className='pr-4 flex screen-lg'>
                 <div className='relative pr-10 self-center flex-col'>
                   <div
                     className='cursor-pointer'
@@ -81,10 +139,17 @@ export default function page() {
                   <div className='cursor-pointer'>Cơ Hội Nghề Nghiệp</div>
                 </div>
               </div>
+              <div className='togerMenu pr-6 self-center'>
+                <span className='inline-block w-[24px] h-[24px] cursor-pointer'>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
+                </span>
+              </div>
             </div>
             <div className='absolute left-0 right-0 top-0 bottom-0 text-[#fff] items-center justify-center flex-col flex'>
               <div className='absolute left-0 right-0 top-0 bottom-0 text-[#fff] items-center justify-center flex-col flex'>
-                <h2 className='text-[42px] text-yellow-100 font-bold text-center'>NƠI ChUYỂN GIAO TRI THỨC CÔNG NGHỆ, <br /> PHÁT TRIỂN NHÂN TÀI TƯƠNG LAI</h2>
+                <h2 className='text-screen text-[42px] text-yellow-100 font-bold text-center'>NƠI ChUYỂN GIAO TRI THỨC CÔNG NGHỆ, <br /> PHÁT TRIỂN NHÂN TÀI TƯƠNG LAI</h2>
                 <h2 className='text-[32px] text-white leading-[36px] mb-[43px] mt-0 px-4 text-center'></h2>
                 {/* <div className='w-[38%] rounded-s-lg py-4 px-8 box-border bg-white mb-9 items-center flex'>
                   <div></div>
@@ -162,7 +227,7 @@ export default function page() {
             <div>
               <div className='w-full px-[15px] mx-auto'>
                 <div className='flex flex-row justify-center items-start flex-wrap'>
-                  <div className='item-ben px-10 relative w-full'>
+                  <div className=' px-10 relative w-full lg:basis-1/3 lg:max-w-1/3'>
                     <div className='justify-center flex'>
                       <div className='bg-[url(/chuyen_giao_cong_nghe-removebg-preview.png)] w-14 h-14 bg-cover bg-no-repeat bg-clip-padding rounded-[3px]'></div>
                     </div>
@@ -326,7 +391,8 @@ export default function page() {
                       </div>
                       <div className='justify-center flex-col flex '>
                         <button
-                          className='w-full block no-underline p-3 my-auto text-white text-center whitespace-nowrap' style={{ background: '#2690eb', maxWidth: '200px', minWidth: '100px', borderRadius: '24px' }}
+                          className='w-full block cursor-pointer no-underline p-3 my-auto text-white text-center whitespace-nowrap' style={{ background: '#2690eb', maxWidth: '200px', minWidth: '100px', borderRadius: '24px' }}
+                          onClick={handleClick}
                         >
                           Ứng tuyển
                         </button>
@@ -339,6 +405,198 @@ export default function page() {
           </div>
         </div>
       </div>
+      <div id='bgForm' className={`${showForm ? "!block" : "hidden"} fixed top-[0] left-0 w-full h-full bg-[#000000] opacity-50 z-[9999]`}></div>
+      {showForm && (
+        <section
+          className="fixed h-[98%] max-h-[80%] min-h-[200px] p-6 left-1/2 bg-white flex z-[9999] w-[600px] top-[21%] rounded-lg shadow-[0_2px_8px_rgba(0,0,0,.16)] border-t-4 border-solid border-[#2680eb] overflow-y-hidden flex-col max-726:w-[90%] max-726:!h-[75%] max-726:max-h-full max-726:mx-auto max-500:top-[15%]"
+          style={{ transform: 'translateX(-50%)' }}
+        >
+          <div className='absolute w-[calc(100%-48px)] justify-between flex'>
+            <div className='text-base font-bold absolute'>Nộp Hồ Sơ</div>
+            <button className="absolute top-0 right-2" onClick={handleClickOff}>✖</button>
+          </div>
+          <form ref={formRef} onSubmit={handleSubmit} className="mt-8 overflow-y-auto overflow-x-hidden">
+            <div className="mt-8 overflow-y-auto overflow-x-hidden">
+              <div className='w-[98%] h-auto'>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Chọn vị trí ứng tuyển</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <select
+                      name="position"
+                      value={formData.position}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    >
+                      <option className='opacity-50' value=""></option>
+                      <option value="TTS Frontend">TTS Frontend</option>
+                      <option value="TTS Backend">TTS Backend</option>
+                      <option value="TTS Python">TTS Python</option>
+                      <option value="TTS Fullstack">TTS Fullstack</option>
+                    </select>
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Họ và tên</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <input
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Trường đại học</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <input
+                      type="text"
+                      name="university"
+                      value={formData.university}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Chuyên nghành</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <input
+                      type="text"
+                      name="specialized"
+                      value={formData.specialized}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Sinh viên năm học</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <select
+                      name="studentyear"
+                      value={formData.studentyear}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    >
+                      <option className='opacity-50' value=""></option>
+                      <option value="TTS Frontend">Năm 3</option>
+                      <option value="TTS Backend">Năm 4</option>
+                      <option value="TTS Fullstack">Năm cuối</option>
+                      <option value="TTS Fullstack">Đã ra trường</option>
+                    </select>
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Kỹ năng</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <textarea
+                      name="skill"
+                      value={formData.skill}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-12 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Project</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <textarea
+                      name="project"
+                      placeholder=""
+                      value={formData.project}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-12 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Email</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+                <div className='w-full mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>Số điện thoại</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-10 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+                <div className='w-ful mb-4'>
+                  <div className='flex'>
+                    <label className='mb-2'>message</label>
+                    <span className='text-red-600 ml-1'>*</span>
+                  </div>
+                  <div className='w-full'>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      className="px-4 h-12 border border-solid border-gray-300 rounded-[4px] outline-none w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="flex justify-center items-center w-full bg-blue-500 text-white p-2 hover:bg-blue-600 transition-all rounded cursor-pointer mt-4 leading-10 h-10"
+            >
+              Gửi hồ sơ
+            </button>
+          </form>
+        </section>
+      )}
       <div className='app-footer text-white'>
         <footer>
           <div className='bg-[#212121] text-white text-base overflow-hidden flex flex-col '>
@@ -384,9 +642,6 @@ export default function page() {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className='flex flex-row items-center justify-center'>
-
               </div>
             </div>
           </div>
