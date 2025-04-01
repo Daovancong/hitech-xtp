@@ -188,8 +188,43 @@ export default function page() {
                 </p>
               </div>
             </div>
-            <div className='sm'></div>
-            <div className='justify-center flex'>
+            <div className='sm-responsive'>
+              <div className='relative'>
+                <div className='relative outline-none visible'>
+                  <div className='splie-arrows'>
+                    <div className='visible'>
+                      <button className='cursor-pointer left-4 splie-arrow'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 w-full h-full">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>
+                      </button>
+                      <button className='cursor-pointer right-4 splie-arrow'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 w-full h-full">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className='relative z-0 overflow-hidden'>
+                    <ul className='flex splie-list' style={{ transform: 'translateX(-2280px)' }}>
+                      <div className='w-[760px] relative outline-none select-none splie-slide'>
+                        <Image className='block w-full align-bottom' width={300} height={300} src={'/Image-01.png'} alt='image__1' />
+                      </div>
+                      <div className='w-[760px] relative outline-none select-none splie-slide'>
+                        <Image className='block w-full align-bottom' width={300} height={300} src={'/Image-02.png'} alt='image__1' />
+                      </div>
+                      <div className='w-[760px] relative outline-none select-none splie-slide'>
+                        <Image className='block w-full align-bottom' width={300} height={300} src={'/Image-03.png'} alt='image__1' />
+                      </div>
+                      <div className='w-[760px] relative outline-none select-none splie-slide'>
+                        <Image className='block w-full align-bottom' width={300} height={300} src={'/Image-04.png'} alt='image__1' />
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='lg-responsive justify-center flex'>
               <div className='h-[40vw] w-[80vw]'>
                 <div className='h-full w-full items-center justify-center flex flex-col'>
                   <div className='w-[calc(100%-120px)] ml-[120px] h-1/2 items-end flex-row flex'>
@@ -602,7 +637,7 @@ export default function page() {
           <div className='bg-[#212121] text-white text-base overflow-hidden flex flex-col '>
             <div className='min-h-44 mt-12 self-center w-full pr-[15px] pl-[15px]'>
               <div className='jus-left flex flex-row '>
-                <div className='w-screen w-[40%] px-4'>
+                <div className='w-[40%] px-4'>
                   <div className='max-w-[380px]'>
                     <div>
                       <div className='w-[100px] h-10' style={{ backgroundPosition: 'center center' }}>
@@ -617,7 +652,7 @@ export default function page() {
                     </div>
                   </div>
                 </div>
-                <div className='w-screen w-[30%] max-w-[300px] px-4'>
+                <div className=' w-[30%] max-w-[300px] px-4'>
                   <div className='min-w-[130px] flex-col flex'>
                     <div className='text-[17px] font-[500] leading-10 m-[46px_0px_4px]' >
                       LIÊN KẾT
