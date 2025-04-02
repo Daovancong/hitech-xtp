@@ -229,18 +229,18 @@ export default function page() {
                 <div className='h-full w-full items-center justify-center flex flex-col'>
                   <div className='w-[calc(100%-120px)] ml-[120px] h-1/2 items-end flex-row flex'>
                     <div className='h-full w-1/2 pr-4 text-[80%] font-[400]'>
-                      <Image className='h-auto w-full rounded-[3px] bg-clip-padding' width={500} height={500} src={'/Image-01.png'} alt='image' />
+                      <Image className='h-auto w-full rounded-[3px] bg-clip-padding' width={500} height={500} src={'/banner1.jpg'} alt='image' />
                     </div>
                     <div className='h-full w-1/2 flex items-end text-[80%] font-[400] '>
-                      <Image className='h-auto w-[60%] rounded-[3px] bg-clip-padding' width={500} height={500} src={'/Image-02.png'} alt='image' />
+                      <Image className='h-auto w-[60%] rounded-[3px] bg-clip-padding' width={500} height={500} src={'/banner4.jpg'} alt='image' />
                     </div>
                   </div>
-                  <div className='w-[calc(100%-140px)] mt-4 mr-[140px] h-1/2 flex-row flex'>
+                  <div className='w-[calc(100%-140px)] mt-14 mr-[140px] h-1/2 flex-row flex'>
                     <div className='h-full w-1/2 justify-end flex text-[80%] font-[400]'>
-                      <Image className='h-1/2 w-1/2 rounded-[3px] bg-clip-padding' width={500} height={500} src={'/Image-03.png'} alt='' />
+                      <Image className='h-1/2 w-1/2 rounded-[3px] bg-clip-padding' width={500} height={500} src={'/banner3.jpg'} alt='' />
                     </div>
                     <div className='h-full w-1/2 pl-4 '>
-                      <Image className='h-auto w-full rounded-[3px] bg-clip-padding' width={500} height={500} src={'/Image-04.png'} alt='' />
+                      <Image className='h-auto w-full rounded-[3px] bg-clip-padding' width={500} height={500} src={'/banner2.jpg'} alt='' />
                     </div>
                   </div>
                 </div>
